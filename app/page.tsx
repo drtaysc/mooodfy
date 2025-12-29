@@ -2,11 +2,15 @@
 import Link from 'next/link';
 import TimelinePost from '@/components/TimelinePost';
 import Footer from '@/components/Footer';
-import { apiService } from '@/services/api';
+import { postController } from '@/server/controllers/postController';
+
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 async function getPosts() {
   try {
-    return await apiService.getPosts(20, 0);
+    return await postController.getAllPosts(20, 0);
   } catch (error) {
     console.error('Error fetching posts:', error);
     return [];

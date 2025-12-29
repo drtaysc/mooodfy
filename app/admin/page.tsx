@@ -1,6 +1,10 @@
 // Admin Dashboard
 import Link from 'next/link';
 import { apiService } from '@/services/api';
+
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 import LogoutButton from '@/components/LogoutButton';
 
 async function getStats() {

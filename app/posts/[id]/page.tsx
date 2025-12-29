@@ -2,11 +2,15 @@
 import { notFound } from 'next/navigation';
 import { format } from 'date-fns';
 import Link from 'next/link';
-import { apiService } from '@/services/api';
+import { postController } from '@/server/controllers/postController';
+
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 async function getPost(id: string) {
   try {
-    return await apiService.getPost(id);
+    return await postController.getPostById(id);
   } catch (error) {
     console.error('Error fetching post:', error);
     return null;

@@ -1,13 +1,17 @@
 import { neon } from '@neondatabase/serverless';
 
-// 获取数据库连接字符串，如果没有设置则使用默认值
-const databaseUrl = process.env.DATABASE_URL || 
-  'postgresql://neondb_owner:npg_F9Q5wluvPezT@ep-soft-art-ade1lztn-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require';
+// Get database connection string from environment variable
+// In Vercel, set DATABASE_URL in Environment Variables
+const databaseUrl = process.env.DATABASE_URL;
 
 if (!databaseUrl) {
-  throw new Error('DATABASE_URL environment variable is not set');
+  throw new Error(
+    'DATABASE_URL environment variable is not set. ' +
+    'Please set it in your Vercel project settings under Environment Variables.'
+  );
 }
 
+// Create Neon database connection
 const sql = neon(databaseUrl);
 
 export { sql };
